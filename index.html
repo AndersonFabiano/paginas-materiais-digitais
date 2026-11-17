@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Materiais digitais para famílias</title>
+  <meta name="description" content="Materiais digitais práticos, em PDF, para abrir no celular ou imprimir. Roteiros de viagem e mais.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Materiais digitais para famílias">
+  <meta property="og:description" content="Materiais digitais práticos, em PDF, para abrir no celular ou imprimir.">
+  <meta property="og:image" content="olimpia/img/card.jpg">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/site.css">
+  <style>
+    .vitrine-hero { background: linear-gradient(180deg, var(--agua) 0%, #fff 100%); padding: 48px 0 32px; }
+    .vitrine-hero p { max-width: 560px; color: var(--texto-suave); font-size: 1.125rem; }
+    .vitrine-hero h1 { max-width: 640px; }
+    .produtos { padding: 16px 0 72px; }
+    .grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px; list-style: none; margin: 0; padding: 0; }
+    .card { background: #fff; border: 1px solid var(--borda); border-radius: var(--raio); overflow: hidden; box-shadow: var(--sombra); display: flex; flex-direction: column; }
+    .card img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; background: var(--agua); }
+    .card .corpo { padding: 18px 20px 22px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+    .card .tag { align-self: flex-start; font-size: .8rem; font-weight: 700; color: var(--teal-dark); background: var(--agua); padding: 3px 10px; border-radius: 999px; }
+    .card h2 { font-size: 1.35rem; margin: 0; }
+    .card p { margin: 0; color: var(--texto-suave); font-size: 1rem; }
+    .card .btn { margin-top: auto; min-height: 48px; font-size: 1.05rem; }
+    @media (min-width: 900px) { .grade { grid-template-columns: repeat(3, 1fr); } .vitrine-hero { padding: 64px 0 40px; } }
+  </style>
+</head>
+<body>
+  <a class="pular" href="#produtos">Pular para os produtos</a>
+
+  <header class="topo">
+    <div class="container">
+      <a class="marca" href="index.html"><img src="assets/favicon.svg" alt="" width="32" height="32"><span data-marca></span></a>
+    </div>
+  </header>
+
+  <main>
+    <section class="vitrine-hero">
+      <div class="container">
+        <h1>Materiais digitais para facilitar a vida da família</h1>
+        <p>Guias práticos em PDF, para abrir no celular ou imprimir. Escolha um material abaixo e veja tudo o que vem dentro.</p>
+      </div>
+    </section>
+
+    <section class="produtos" id="produtos" aria-label="Produtos">
+      <div class="container">
+        <ul class="grade">
+
+          <!-- =====================================================
+               CARD DE PRODUTO — para adicionar um novo produto,
+               copie do <li> até o </li> e troque: imagem, tag,
+               título, frase e o link (pasta-do-produto/index.html).
+               ===================================================== -->
+          <li class="card">
+            <img src="olimpia/img/card.jpg" alt="Capa do material Roteiros Prontos Olímpia" width="600" height="600" loading="lazy">
+            <div class="corpo">
+              <span class="tag">Viagem</span>
+              <h2>Roteiros Prontos Olímpia</h2>
+              <p>10 roteiros por perfil de família para curtir o Thermas dos Laranjais e o Hot Beach com menos fila e mais organização.</p>
+              <a class="btn btn-secundario" href="olimpia/index.html">Ver material</a>
+            </div>
+          </li>
+          <!-- fim do card -->
+
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <div class="container">
+      <nav aria-label="Links legais">
+        <a href="privacidade.html">Política de privacidade</a>
+        <a href="termos.html">Termos de uso</a>
+      </nav>
+      <p class="copy">© <span data-ano>2026</span> <span data-marca></span></p>
+    </div>
+  </footer>
+
+  <script src="assets/site.js"></script>
+</body>
+</html>
