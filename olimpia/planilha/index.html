@@ -130,23 +130,32 @@
 <!--- script load and setup --->
 <script src="https://checkout.hotmart.com/lib/hotmart-checkout-elements.js"></script>
 <script>
-checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel')
+/* Só monta o widget quando a página abre COM parâmetros no endereço
+   (a pessoa veio do checkout da Hotmart). Sem parâmetros, o widget não é montado
+   e aparecem os nossos botões "Sim/Não" (ver #botoes-reserva abaixo). */
+window.veioDoCheckout = location.search.length > 1;
+if (window.veioDoCheckout) {
+  checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel')
+} else {
+  /* remove o container: a biblioteca da Hotmart monta sozinha quando encontra
+     #hotmart-sales-funnel, mesmo sem chamar init (teste de 17/11) */
+  document.getElementById('hotmart-sales-funnel').remove();
+}
 </script>
 <!-- HOTMART - Sales Funnel Widget -->
 
-            <!-- Nossos botões (reserva): ficam escondidos e só aparecem se o widget
-                 da Hotmart continuar vazio 4 s depois de a página carregar
-                 (ex.: o script da Hotmart não carregou).
-                 Atenção (teste de 17/11): sem compra em andamento o widget NÃO fica vazio,
-                 ele mostra o aviso "É necessário haver uma compra em andamento...".
-                 Decisão do Anderson: manter assim, para quem compra ver só o widget da Hotmart. -->
+            <!-- Nossos botões "Sim/Não":
+                 - página aberta SEM parâmetros → aparecem (o widget não é montado);
+                 - página aberta COM parâmetros → ficam escondidos (vale o widget da Hotmart).
+                 Reserva extra: se o widget continuar vazio 4 s depois de carregar
+                 (ex.: o script da Hotmart falhou), eles aparecem também. -->
             <div id="botoes-reserva">
               <div class="botoes">
                 <a class="btn btn-compra btn-largo" href="#decisao" data-checkout="planilha">Sim, quero a planilha</a>
               </div>
               <a class="nao" href="../index.html">Não, obrigado</a>
             </div>
-            <script>document.getElementById("botoes-reserva").hidden = true;</script>
+            <script>document.getElementById("botoes-reserva").hidden = window.veioDoCheckout !== false;</script>
           </article>
           <p class="planos-nota">Compra processada pela Hotmart, com ambiente seguro. Garantia de 7 dias: se não for o que você esperava, peça o reembolso pela Hotmart.</p>
         </div>
