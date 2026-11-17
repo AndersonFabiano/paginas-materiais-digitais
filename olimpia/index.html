@@ -3,6 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>/* endereço sem a barra final (/olimpia) → manda para /olimpia/ para as imagens e o CSS carregarem */
+    if (location.protocol !== "file:" && !/\/$|\.html$/.test(location.pathname)) location.replace(location.pathname + "/" + location.search + location.hash);</script>
   <title>Roteiros Prontos Olímpia: Thermas dos Laranjais e Hot Beach</title>
   <meta name="description" content="10 roteiros prontos por perfil de família para curtir o Thermas dos Laranjais e o Hot Beach com menos tempo em fila e mais organização. PDF para abrir no celular ou imprimir.">
   <meta property="og:type" content="product">
