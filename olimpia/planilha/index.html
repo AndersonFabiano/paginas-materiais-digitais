@@ -123,15 +123,31 @@
               <li>Garantia de 7 dias</li>
             </ul>
 
-            <!-- WIDGET UPSELL HOTMART
-                 Cole aqui o código de compra com 1 clique da Hotmart.
-                 Quando o widget estiver aqui, o botão "Sim, quero a planilha" abaixo pode ser removido. -->
+<!-- HOTMART - Sales Funnel Widget -->
+<!--- sales funnel container --->
+<div id="hotmart-sales-funnel"></div>
 
-            <div class="botoes">
-              <a class="btn btn-compra btn-largo" href="#decisao" data-checkout="planilha">Sim, quero a planilha</a>
+<!--- script load and setup --->
+<script src="https://checkout.hotmart.com/lib/hotmart-checkout-elements.js"></script>
+<script>
+checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel')
+</script>
+<!-- HOTMART - Sales Funnel Widget -->
+
+            <!-- Nossos botões (reserva): ficam escondidos e só aparecem se o widget
+                 da Hotmart continuar vazio 4 s depois de a página carregar
+                 (ex.: o script da Hotmart não carregou).
+                 Atenção (teste de 17/11): sem compra em andamento o widget NÃO fica vazio,
+                 ele mostra o aviso "É necessário haver uma compra em andamento...".
+                 Decisão do Anderson: manter assim, para quem compra ver só o widget da Hotmart. -->
+            <div id="botoes-reserva">
+              <div class="botoes">
+                <a class="btn btn-compra btn-largo" href="#decisao" data-checkout="planilha">Sim, quero a planilha</a>
+              </div>
+              <a class="nao" href="../index.html">Não, obrigado</a>
             </div>
+            <script>document.getElementById("botoes-reserva").hidden = true;</script>
           </article>
-          <a class="nao" href="../index.html">Não, obrigado</a>
           <p class="planos-nota">Compra processada pela Hotmart, com ambiente seguro. Garantia de 7 dias: se não for o que você esperava, peça o reembolso pela Hotmart.</p>
         </div>
       </div>
@@ -174,6 +190,15 @@
         a.addEventListener("click", function () {
           if (window.fbq) fbq("track", "InitiateCheckout", { content_name: "Planilha Orcamento Olimpia" });
         });
+      });
+
+      // Widget da Hotmart vazio 4 s depois de carregar → mostra os nossos botões
+      window.addEventListener("load", function () {
+        setTimeout(function () {
+          var w = document.getElementById("hotmart-sales-funnel");
+          var vazio = !w || (w.children.length === 0 && w.textContent.trim() === "");
+          if (vazio) document.getElementById("botoes-reserva").hidden = false;
+        }, 4000);
       });
     })();
   </script>
