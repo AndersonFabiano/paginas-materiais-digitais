@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>/* endereço sem a barra final → manda para a versão com barra (imagens e CSS) */
+    if (location.protocol !== "file:" && !/\/$|\.html$/.test(location.pathname)) location.replace(location.pathname + "/" + location.search + location.hash);</script>
+  <meta name="robots" content="noindex">
+  <title>Compra confirmada: Planilha de Orçamento da Viagem a Olímpia</title>
+  <meta name="description" content="Planilha de orçamento da viagem a Olímpia: preencha as células amarelas e veja o total, o valor por pessoa, por dia e quanto guardar por mês.">
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/site.css">
+  <link rel="stylesheet" href="../olimpia.css">
+  <style>
+    .confirmado { background: var(--teal-dark); color: #fff; padding: 22px 0; }
+    .confirmado .container { display: flex; gap: 14px; align-items: flex-start; }
+    .confirmado .ok { flex: none; width: 40px; height: 40px; border-radius: 50%; background: var(--teal); display: grid; place-items: center; font-size: 1.3rem; font-weight: 800; }
+    .confirmado p { margin: 0; font-size: 1.05rem; line-height: 1.45; }
+    .confirmado strong { display: block; font-family: var(--fonte-titulo); font-size: 1.3rem; margin-bottom: 2px; }
+    .upsell-hero { padding: 40px 0 8px; }
+    .upsell-hero .container { display: grid; gap: 24px; align-items: center; }
+    .upsell-hero .sub { font-size: 1.12rem; color: var(--texto-suave); max-width: 560px; }
+    .upsell-hero .capa { justify-self: center; width: min(300px, 76vw); border-radius: 22px; box-shadow: 0 30px 60px -25px rgba(11, 79, 87, .45); }
+    @media (min-width: 900px) { .upsell-hero .container { grid-template-columns: 1.2fr .8fr; gap: 48px; } .upsell-hero { padding-top: 56px; } }
+    .partes { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; counter-reset: p; }
+    .partes li { counter-increment: p; background: #fff; border: 1px solid var(--borda); border-radius: 14px; padding: 12px 14px 12px 56px; position: relative; }
+    .partes li::before { content: counter(p); position: absolute; left: 14px; top: 12px; width: 30px; height: 30px; border-radius: 9px; background: var(--teal); color: #fff; display: grid; place-items: center; font-family: var(--fonte-titulo); font-weight: 800; }
+    .partes li.resumo::before { content: "="; background: var(--sol); color: var(--teal-dark); }
+    .partes b { display: block; font-family: var(--fonte-titulo); font-size: 1.08rem; color: var(--teal-dark); }
+    .partes span { color: var(--texto-suave); font-size: .95rem; }
+    .print { display: grid; gap: 24px; align-items: start; }
+    .print img { width: min(560px, 100%); justify-self: center; border-radius: 10px; box-shadow: var(--sombra); }
+    @media (min-width: 900px) { .print { grid-template-columns: 1.1fr .9fr; gap: 40px; } }
+    .amarelo { background: #FFF2CC; color: #0000CC; padding: 0 6px; border-radius: 4px; font-weight: 700; }
+    .decisao { max-width: 480px; margin: 0 auto; }
+    .botoes { display: grid; gap: 12px; }
+    .nao { display: block; text-align: center; padding: 12px; color: var(--texto-suave); font-size: .98rem; }
+    .nao:hover { color: var(--teal-dark); }
+  </style>
+
+  <!-- ===== PIXEL DA META (desativado) — mesmo bloco da página do Olímpia.
+       Quando tiver o número: copie o bloco do <head> de ../index.html para cá. -->
+</head>
+<body>
+  <header class="topo">
+    <div class="container">
+      <span class="marca"><img src="../../assets/favicon.svg" alt="" width="32" height="32"><span data-marca></span></span>
+    </div>
+  </header>
+
+  <!-- CONFIRMAÇÃO DA COMPRA -->
+  <div class="confirmado" role="status">
+    <div class="container">
+      <span class="ok" aria-hidden="true">✓</span>
+      <p><strong>Sua compra foi confirmada.</strong>O acesso aos roteiros já foi enviado para o seu e-mail.</p>
+    </div>
+  </div>
+
+  <main id="conteudo">
+
+    <!-- OFERTA -->
+    <section class="upsell-hero">
+      <div class="container">
+        <div>
+          <span class="sobretitulo">Para completar o planejamento</span>
+          <h1>Saiba quanto a viagem a Olímpia vai custar <span style="color:var(--coral-700)">antes de sair de casa</span></h1>
+          <p class="sub">Com a Planilha de Orçamento da Viagem a Olímpia, você coloca os seus valores e ela calcula sozinha o total da viagem, quanto fica por pessoa, por dia e quanto guardar por mês.</p>
+          <a class="btn btn-compra" href="#decisao">Ver a oferta da planilha</a>
+        </div>
+        <img class="capa" src="img/capa.jpg" alt="Capa da Planilha de Orçamento da Viagem a Olímpia" width="600" height="600" fetchpriority="high">
+      </div>
+    </section>
+
+    <!-- O QUE A PLANILHA CALCULA -->
+    <section class="secao">
+      <div class="container">
+        <div class="secao-titulo">
+          <span class="sobretitulo">O que tem na planilha</span>
+          <h2>Todos os gastos da viagem em um lugar só</h2>
+        </div>
+        <ol class="partes">
+          <li><b>Quem vai e por quanto tempo</b><span>Adultos, pessoas com meia-entrada, crianças de 1 a 6 anos, noites de hospedagem e dias de parque.</span></li>
+          <li><b>Ingressos</b><span>Inteira, meia-entrada e criança de 1 a 6 anos, por pessoa e por dia.</span></li>
+          <li><b>Hospedagem</b><span>Valor da diária vezes as noites.</span></li>
+          <li><b>Alimentação</b><span>Gasto médio por pessoa por dia, contando o dia de chegada ou volta.</span></li>
+          <li><b>Transporte de carro</b><span>Combustível de ida e volta, calculado pela distância, consumo do carro e preço do litro, mais os pedágios.</span></li>
+          <li><b>Dentro do parque</b><span>Estacionamento e armário por dia, e os extras da viagem.</span></li>
+          <li class="resumo"><b>Resumo</b><span>Total da viagem, por pessoa, por dia de viagem e quanto guardar por mês.</span></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- PRINT -->
+    <section class="secao secao-agua">
+      <div class="container print">
+        <img src="img/planilha.jpg" alt="Ilustração da planilha com os valores de exemplo e o resumo com o total da viagem" width="560" height="600" loading="lazy">
+        <div>
+          <span class="sobretitulo">Como funciona</span>
+          <h2>Você preenche, ela calcula</h2>
+          <p>Preencha só as <span class="amarelo">células amarelas</span>, com os seus números. Todo o resto é calculado sozinho, e o resumo atualiza na hora.</p>
+          <p>A planilha já vem com valores de exemplo. Eles são só uma referência: troque pelos preços do dia da sua viagem.</p>
+          <p>O arquivo é uma planilha do Excel (.xlsx), que também abre no Google Planilhas.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- DECISÃO -->
+    <section class="secao" id="decisao">
+      <div class="container">
+        <div class="decisao">
+          <article class="plano plano-destaque">
+            <h3>Planilha de Orçamento da Viagem a Olímpia</h3>
+            <p class="resumo">Planilha que calcula sozinha os gastos da viagem.</p>
+            <p class="preco"><small>R$</small>19,90</p>
+            <p class="pagamento">Pagamento único</p>
+            <ul>
+              <li>Ingressos, hospedagem, alimentação, transporte e gastos no parque</li>
+              <li>Total, por pessoa, por dia e quanto guardar por mês</li>
+              <li>Acesso no seu e-mail, pela Hotmart</li>
+              <li>Garantia de 7 dias</li>
+            </ul>
+
+            <!-- WIDGET UPSELL HOTMART
+                 Cole aqui o código de compra com 1 clique da Hotmart.
+                 Quando o widget estiver aqui, o botão "Sim, quero a planilha" abaixo pode ser removido. -->
+
+            <div class="botoes">
+              <a class="btn btn-compra btn-largo" href="#decisao" data-checkout="planilha">Sim, quero a planilha</a>
+            </div>
+          </article>
+          <a class="nao" href="../index.html">Não, obrigado</a>
+          <p class="planos-nota">Compra processada pela Hotmart, com ambiente seguro. Garantia de 7 dias: se não for o que você esperava, peça o reembolso pela Hotmart.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <div class="container">
+      <p class="aviso">Material independente, sem vínculo com o Thermas dos Laranjais ou com o Hot Beach. Horários, preços e atrações podem mudar: confira sempre os canais oficiais dos parques antes de ir.</p>
+      <nav aria-label="Links legais">
+        <a href="../../privacidade.html">Política de privacidade</a>
+        <a href="../../termos.html">Termos de uso</a>
+      </nav>
+      <p class="copy">© <span data-ano>2026</span> <span data-marca></span></p>
+    </div>
+  </footer>
+
+  <script src="../../assets/site.js"></script>
+  <script>
+    /* ===== LINK DE CHECKOUT ===== */
+    const CHECKOUT = {
+      planilha: "https://pay.hotmart.com/T108543267K"
+    };
+
+    (function () {
+      // Repassa os parâmetros de anúncio (utm_*, src, sck) para o checkout
+      var params = new URLSearchParams(location.search);
+      function linkCom(url) {
+        try {
+          var u = new URL(url);
+          params.forEach(function (v, k) {
+            if (/^utm_/.test(k) || k === "src" || k === "sck") u.searchParams.set(k, v);
+          });
+          return u.toString();
+        } catch (e) { return url; }
+      }
+      document.querySelectorAll("[data-checkout]").forEach(function (a) {
+        var url = CHECKOUT[a.dataset.checkout];
+        if (url) a.href = linkCom(url);
+        a.addEventListener("click", function () {
+          if (window.fbq) fbq("track", "InitiateCheckout", { content_name: "Planilha Orcamento Olimpia" });
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
