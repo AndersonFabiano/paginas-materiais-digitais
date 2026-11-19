@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>/* endereço sem a barra final → manda para a versão com barra (imagens e CSS) */
+    if (location.protocol !== "file:" && !/\/$|\.html$/.test(location.pathname)) location.replace(location.pathname + "/" + location.search + location.hash);</script>
+  <meta name="robots" content="noindex">
+  <title>Compra confirmada: Planilha Mercado da Semana</title>
+  <meta name="description" content="Planilha Mercado da Semana: a lista de compras pronta de cada um dos 4 cardápios semanais do guia Marmitas da Semana.">
+  <link rel="icon" href="../../assets/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="../../assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/site.css">
+  <link rel="stylesheet" href="../marmitas.css">
+  <style>
+    .confirmado { background: var(--teal-dark); color: #fff; padding: 22px 0; }
+    .confirmado .container { display: flex; gap: 14px; align-items: flex-start; }
+    .confirmado .ok { flex: none; width: 40px; height: 40px; border-radius: 50%; background: #2F7D45; display: grid; place-items: center; font-size: 1.3rem; font-weight: 800; }
+    .confirmado p { margin: 0; font-size: 1.05rem; line-height: 1.45; }
+    .confirmado strong { display: block; font-family: var(--fonte-titulo); font-size: 1.3rem; margin-bottom: 2px; }
+    .upsell-hero { padding: 40px 0 8px; }
+    .upsell-hero .container { display: grid; gap: 28px; align-items: center; }
+    .upsell-hero .sub { font-size: 1.12rem; color: var(--texto-suave); max-width: 560px; }
+    .upsell-hero .ilustra { justify-self: center; width: min(460px, 100%); border-radius: 10px; box-shadow: 0 30px 60px -25px rgba(90, 44, 14, .45); }
+    @media (min-width: 900px) { .upsell-hero .container { grid-template-columns: 1fr 1fr; gap: 48px; } .upsell-hero { padding-top: 56px; } }
+    .partes { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+    .partes li { background: #fff; border: 1px solid var(--borda); border-left: 5px solid var(--teal); border-radius: 14px; padding: 12px 16px; }
+    .partes li.como { border-left-color: #2F7D45; }
+    .partes b { display: flex; justify-content: space-between; gap: 10px; font-family: var(--fonte-titulo); font-size: 1.08rem; color: var(--teal-dark); }
+    .partes b em { font-style: normal; font-size: .8rem; font-weight: 700; color: var(--teal-700); background: var(--agua); padding: 2px 10px; border-radius: 999px; white-space: nowrap; align-self: center; }
+    .partes span { color: var(--texto-suave); font-size: .95rem; }
+    @media (min-width: 760px) { .partes { grid-template-columns: 1fr 1fr; } .partes li.como { grid-column: 1 / -1; } }
+    .passos-lista { margin: 0; padding-left: 1.2em; display: grid; gap: 8px; max-width: 720px; }
+    .decisao { max-width: 480px; margin: 0 auto; }
+    .botoes { display: grid; gap: 12px; }
+    .nao { display: block; text-align: center; padding: 12px; color: var(--texto-suave); font-size: .98rem; }
+    .nao:hover { color: var(--teal-dark); }
+  </style>
+
+  <!-- ===== PIXEL DA META — ID 4610757655861648 ===== -->
+  <script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '4610757655861648');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=4610757655861648&ev=PageView&noscript=1" alt=""></noscript>
+  <!-- ===== FIM DO PIXEL DA META ===== -->
+</head>
+<body>
+  <header class="topo">
+    <div class="container">
+      <span class="marca"><span class="marca-logo"><img src="../../assets/logo-al.png" alt="" width="120" height="96"></span><span data-marca></span></span>
+    </div>
+  </header>
+
+  <!-- CONFIRMAÇÃO DA COMPRA -->
+  <div class="confirmado tema-marmitas" role="status">
+    <div class="container">
+      <span class="ok" aria-hidden="true">✓</span>
+      <p><strong>Sua compra foi confirmada.</strong>O acesso às receitas já foi enviado para o seu e-mail.</p>
+    </div>
+  </div>
+
+  <main id="conteudo" class="tema-marmitas">
+
+    <!-- OFERTA -->
+    <section class="upsell-hero">
+      <div class="container">
+        <div>
+          <span class="sobretitulo">Para completar a sua semana</span>
+          <h1>Vá ao mercado com a <span>lista de compras pronta</span></h1>
+          <p class="sub">A Planilha Mercado da Semana traz a lista de compras de cada um dos 4 cardápios semanais do guia, separada por categoria. No mercado, é só marcar com x o que já foi para o carrinho.</p>
+          <a class="btn btn-compra" href="#decisao">Ver a oferta da planilha</a>
+        </div>
+        <img class="ilustra" src="img/planilha.jpg" alt="Ilustração da aba Semana 1 da planilha: lista de compras por categoria, com a coluna Comprado marcada com x" width="560" height="666" fetchpriority="high">
+      </div>
+    </section>
+
+    <!-- O QUE TEM NA PLANILHA -->
+    <section class="secao">
+      <div class="container">
+        <div class="secao-titulo">
+          <span class="sobretitulo">O que tem na planilha</span>
+          <h2>Uma lista de compras para cada semana</h2>
+          <p>As 4 listas seguem os 4 cardápios semanais do guia Marmitas da Semana (bônus 2 do plano Completo).</p>
+        </div>
+        <ul class="partes">
+          <li class="como"><b>Como usar</b><span>Uma aba com o passo a passo: escolha a semana, abra a aba dela e vá marcando os itens.</span></li>
+          <li><b>Semana 1 <em>29 itens</em></b><span>Frango xadrez, carne moída com legumes, lombo suíno com batata, tilápia com legumes e macarrão à bolonhesa.</span></li>
+          <li><b>Semana 2 <em>24 itens</em></b><span>Frango com batata-doce, carne de panela, costelinha ao barbecue, strogonoff de cogumelos e nhoque ao sugo.</span></li>
+          <li><b>Semana 3 <em>28 itens</em></b><span>Strogonoff de frango, picadinho de carne, lombo ao molho de laranja, legumes com quinoa e arroz de forno.</span></li>
+          <li><b>Semana 4 <em>25 itens</em></b><span>Coxa de frango com ervas, almôndegas, porco com abóbora, feijoada vegetariana e risoto de frango.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- COMO FUNCIONA -->
+    <section class="secao secao-agua">
+      <div class="container">
+        <div class="secao-titulo">
+          <span class="sobretitulo">Como funciona</span>
+          <h2>Escolha a semana e marque no carrinho</h2>
+        </div>
+        <ol class="passos-lista">
+          <li>Escolha a semana que vai cozinhar e abra a aba dela.</li>
+          <li>Os itens já estão separados por categoria: Proteínas, Hortifruti, Mercearia e Temperos e outros.</li>
+          <li>Marque x na coluna "Comprado" conforme for colocando no carrinho.</li>
+          <li>O topo da lista mostra quantos itens você já marcou.</li>
+        </ol>
+        <p style="margin-top:18px;color:var(--texto-suave)">O arquivo é uma planilha do Excel (.xlsx), que também abre no Google Planilhas.</p>
+      </div>
+    </section>
+
+    <!-- DECISÃO -->
+    <section class="secao" id="decisao">
+      <div class="container">
+        <div class="decisao">
+          <article class="plano plano-destaque">
+            <h3>Planilha Mercado da Semana</h3>
+            <p class="resumo">A lista de compras pronta dos 4 cardápios semanais.</p>
+            <p class="preco"><small>R$</small>9,90</p>
+            <p class="pagamento">Pagamento único</p>
+            <ul>
+              <li>4 listas de compras, uma por semana</li>
+              <li>Itens separados por categoria, com coluna para marcar</li>
+              <li>Acesso no seu e-mail, pela Hotmart</li>
+              <li>Garantia de 7 dias</li>
+            </ul>
+
+<!-- HOTMART - Sales Funnel Widget -->
+<!--- sales funnel container --->
+<div id="hotmart-sales-funnel"></div>
+
+<!--- script load and setup --->
+<script src="https://checkout.hotmart.com/lib/hotmart-checkout-elements.js"></script>
+<script>
+/* Só monta o widget quando a página abre COM parâmetros no endereço
+   (a pessoa veio do checkout da Hotmart). Sem parâmetros, o widget não é montado
+   e aparecem os nossos botões "Sim/Não" (ver #botoes-reserva abaixo). */
+window.veioDoCheckout = location.search.length > 1;
+if (window.veioDoCheckout) {
+  checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel')
+} else {
+  /* remove o container: a biblioteca da Hotmart monta sozinha quando encontra
+     #hotmart-sales-funnel, mesmo sem chamar init */
+  document.getElementById('hotmart-sales-funnel').remove();
+}
+</script>
+<!-- HOTMART - Sales Funnel Widget -->
+
+            <!-- Nossos botões "Sim/Não":
+                 - página aberta SEM parâmetros → aparecem (o widget não é montado);
+                 - página aberta COM parâmetros → ficam escondidos (vale o widget da Hotmart).
+                 Reserva extra: se o widget continuar vazio 4 s depois de carregar, eles aparecem. -->
+            <div id="botoes-reserva">
+              <div class="botoes">
+                <a class="btn btn-compra btn-largo" href="#decisao" data-checkout="planilha">Sim, quero a planilha</a>
+              </div>
+              <a class="nao" href="../index.html">Não, obrigado</a>
+            </div>
+            <script>document.getElementById("botoes-reserva").hidden = window.veioDoCheckout !== false;</script>
+          </article>
+          <p class="planos-nota">Compra processada pela Hotmart, com ambiente seguro. Garantia de 7 dias: se não for o que você esperava, peça o reembolso pela Hotmart.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <div class="container">
+      <p class="aviso">Este material é um guia de organização e receitas para marmitas, com fins práticos e de rotina. Não substitui orientação nutricional profissional: para necessidades específicas (restrições, condições de saúde, metas), consulte um nutricionista.</p>
+      <nav aria-label="Links legais">
+        <a href="../../privacidade.html">Política de privacidade</a>
+        <a href="../../termos.html">Termos de uso</a>
+      </nav>
+      <p class="copy">© <span data-ano>2026</span> <span data-marca></span></p>
+    </div>
+  </footer>
+
+  <script src="../../assets/site.js"></script>
+  <script>
+    /* ===== LINK DE CHECKOUT (botão de reserva "Sim, quero a planilha") ===== */
+    const CHECKOUT = {
+      planilha: "https://pay.hotmart.com/L108575175J"
+    };
+
+    (function () {
+      // Repassa os parâmetros de anúncio (utm_*, src, sck) para o checkout
+      var params = new URLSearchParams(location.search);
+      function linkCom(url) {
+        try {
+          var u = new URL(url);
+          params.forEach(function (v, k) {
+            if (/^utm_/.test(k) || k === "src" || k === "sck") u.searchParams.set(k, v);
+          });
+          return u.toString();
+        } catch (e) { return url; }
+      }
+      document.querySelectorAll("[data-checkout]").forEach(function (a) {
+        var url = CHECKOUT[a.dataset.checkout];
+        if (url) a.href = linkCom(url);
+        a.addEventListener("click", function () {
+          if (window.fbq) fbq("track", "InitiateCheckout", { content_name: "Planilha Mercado da Semana" });
+        });
+      });
+
+      // Widget da Hotmart vazio 4 s depois de carregar → mostra os nossos botões
+      window.addEventListener("load", function () {
+        setTimeout(function () {
+          var w = document.getElementById("hotmart-sales-funnel");
+          var vazio = !w || (w.children.length === 0 && w.textContent.trim() === "");
+          if (vazio) document.getElementById("botoes-reserva").hidden = false;
+        }, 4000);
+      });
+    })();
+  </script>
+</body>
+</html>
