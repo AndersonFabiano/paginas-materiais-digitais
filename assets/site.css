@@ -50,7 +50,9 @@ p { margin: 0 0 1em; }
 .topo { background: var(--branco); border-bottom: 1px solid var(--borda); }
 .topo .container { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 60px; }
 .marca { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--teal-dark); font-family: var(--fonte-titulo); font-weight: 700; font-size: 1rem; line-height: 1.1; }
-.marca img { width: 32px; height: 32px; flex: none; }
+/* Logo AL da marca, num quadrado branco com contorno no azul-piscina do site */
+.marca-logo { flex: none; width: 40px; height: 40px; display: grid; place-items: center; background: #fff; border: 2px solid var(--teal); border-radius: 11px; }
+.marca-logo img { width: 30px; height: auto; }
 .link-inicio { font-size: .9rem; color: var(--texto-suave); text-decoration: none; display: inline-flex; align-items: center; gap: 4px; padding: 6px 2px; }
 .link-inicio:hover { color: var(--teal-dark); text-decoration: underline; }
 
