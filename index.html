@@ -26,7 +26,7 @@
     /* Filtro por categoria (no topo, à direita) */
     .filtro { display: grid; gap: 6px; }
     .filtro label { font-family: var(--fonte-titulo); font-weight: 700; font-size: .95rem; color: var(--teal-dark); }
-    .filtro .campo { display: flex; align-items: center; gap: 10px; background: #fff; border: 2px solid var(--borda); border-radius: 12px; padding: 0 12px; min-height: 48px; min-width: 240px; }
+    .filtro .campo { display: flex; align-items: center; gap: 10px; background: #fff; border: 2px solid var(--borda); border-radius: 12px; padding: 0 12px; min-height: 48px; min-width: 280px; }
     .filtro .campo:focus-within { border-color: var(--teal); }
     .filtro .quadrado { flex: none; width: 16px; height: 16px; border-radius: 4px; background: var(--cat-cor, var(--teal-dark)); }
     .filtro select { flex: 1; border: 0; background: transparent; font: inherit; font-weight: 700; color: var(--texto); min-height: 44px; cursor: pointer; }
@@ -35,11 +35,13 @@
 
     .produtos { padding: 16px 0 72px; }
     .grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px; list-style: none; margin: 0; padding: 0; }
-    .card { --cat-cor: var(--borda); background: #fff; border: 2px solid var(--cat-cor); border-radius: var(--raio); overflow: hidden; box-shadow: var(--sombra); display: flex; flex-direction: column; position: relative; }
+    .grade { padding-top: 14px; } /* espaço para a etiqueta que sobe acima do card */
+    .card { --cat-cor: var(--borda); background: #fff; border: 2px solid var(--cat-cor); border-radius: var(--raio); box-shadow: var(--sombra); display: flex; flex-direction: column; position: relative; }
     .card[hidden] { display: none; }
-    .card img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; background: var(--agua); }
-    /* Etiqueta da categoria: retângulo no canto superior esquerdo do texto do card, na cor da categoria */
-    .card .tag { align-self: flex-start; font-family: var(--fonte-titulo); font-size: .85rem; font-weight: 700; line-height: 1; color: var(--cat-texto, #fff); background: var(--cat-tag, var(--teal-dark)); padding: 7px 12px; border-radius: 6px; }
+    .card img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; background: var(--agua); border-radius: calc(var(--raio) - 2px) calc(var(--raio) - 2px) 0 0; }
+    /* Etiqueta da categoria: retângulo encaixado no topo esquerdo do card,
+       com o fundo na mesma cor do contorno do card */
+    .card .tag { position: absolute; top: -14px; left: 16px; z-index: 1; font-family: var(--fonte-titulo); font-size: .95rem; font-weight: 800; letter-spacing: .02em; line-height: 1; color: var(--cat-texto, #fff); background: var(--cat-cor); padding: 7px 14px 6px; border-radius: 7px; box-shadow: 0 3px 8px rgba(0,0,0,.15); }
     .card .corpo { padding: 18px 20px 22px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
     .card h2 { font-size: 1.35rem; margin: 0; }
     .card p { margin: 0; color: var(--texto-suave); font-size: 1rem; }
@@ -68,6 +70,7 @@
           <div class="campo">
             <span class="quadrado" aria-hidden="true"></span>
             <select id="categoria" aria-controls="lista-produtos">
+              <option value="" selected disabled hidden>Selecionar a categoria</option>
               <option value="">Todas as categorias</option>
             </select>
           </div>
@@ -88,9 +91,9 @@
                (viagem, saude...). A etiqueta, as cores e o filtro saem sozinhos.
                ===================================================== -->
           <li class="card" data-categoria="viagem">
+            <span class="tag"></span>
             <img src="olimpia/img/card.jpg" alt="Capa do material Roteiros Prontos Olímpia" width="600" height="600" loading="lazy">
             <div class="corpo">
-              <span class="tag"></span>
               <h2>Roteiros Prontos Olímpia</h2>
               <p>10 roteiros por perfil de família para curtir o Thermas dos Laranjais e o Hot Beach com menos fila e mais organização.</p>
               <a class="btn btn-secundario" href="olimpia/index.html">Ver material</a>
@@ -116,14 +119,13 @@
   <script src="assets/site.js"></script>
   <script>
     /* ===== CATEGORIAS DA VITRINE — cada categoria tem a sua cor =====
-       cor   = contorno do card e quadradinho do filtro
-       tag   = fundo da etiqueta no card
+       cor   = contorno do card, fundo da etiqueta e quadradinho do filtro
        texto = cor da letra da etiqueta (branca em cor escura, escura em cor clara)
        Só aparecem no filtro as categorias que já têm algum card. */
     const CATEGORIAS = {
-      viagem: { nome: "Viagem", cor: "#0E9AA7", tag: "#0A7F8A", texto: "#ffffff" },  // azul-piscina
-      saude:  { nome: "Saúde",  cor: "#F7A35C", tag: "#F7A35C", texto: "#4A2300" }   // laranja claro
-      // próxima: { nome: "...", cor: "#1FB58F", tag: "#1FB58F", texto: "#06372A" }  // verde-piscina
+      viagem: { nome: "Viagem", cor: "#0A7F8A", texto: "#ffffff" },  // azul-piscina (tom com contraste para a letra branca)
+      saude:  { nome: "Saúde",  cor: "#F7A35C", texto: "#4A2300" }   // laranja claro
+      // próxima: { nome: "...", cor: "#1FB58F", texto: "#06372A" }  // verde-piscina
     };
 
     (function () {
@@ -139,7 +141,6 @@
         if (!cat) return;
         usadas[c.dataset.categoria] = (usadas[c.dataset.categoria] || 0) + 1;
         c.style.setProperty("--cat-cor", cat.cor);
-        c.style.setProperty("--cat-tag", cat.tag);
         c.style.setProperty("--cat-texto", cat.texto);
         c.querySelector(".tag").textContent = cat.nome;
       });
