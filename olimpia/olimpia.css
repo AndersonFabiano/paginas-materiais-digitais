@@ -135,7 +135,10 @@
 .btn-plataforma.com-logo { background: #fff; }
 .btn-plataforma.com-logo.kiwify  { border-color: #0B7A45; }
 .btn-plataforma.com-logo.hotmart { border-color: #C63C14; }
-.btn-plataforma img { max-height: 26px; max-width: 80%; width: auto; }
+.btn-plataforma img { max-width: 82%; width: auto; }
+/* alturas diferentes para os dois logos terem o mesmo peso visual (a chama da Hotmart é alta) */
+.btn-plataforma.kiwify img  { height: 24px; }
+.btn-plataforma.hotmart img { height: 34px; }
 .planos-nota { text-align: center; color: var(--texto-suave); font-size: .92rem; margin: 22px 0 0; }
 @media (min-width: 820px) {
   .planos { grid-template-columns: 1fr 1fr; max-width: 900px; margin: 0 auto; }
