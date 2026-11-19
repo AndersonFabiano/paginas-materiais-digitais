@@ -208,7 +208,11 @@
               <li>Bônus 4: Atualização grátis da temporada 2027</li>
               <li>Garantia de 7 dias</li>
             </ul>
-            <a class="btn btn-compra btn-largo" href="#planos" data-checkout="completo">Quero o Completo</a>
+            <p class="pagar-texto">Quero este plano — escolha onde pagar:</p>
+            <div class="pagar" role="group" aria-label="Pagar o plano Completo">
+              <a class="btn-plataforma kiwify" href="#planos" data-checkout="completo_kiwify" data-plataforma="kiwify"><span>Kiwify</span></a>
+              <a class="btn-plataforma hotmart" href="#planos" data-checkout="completo_hotmart" data-plataforma="hotmart"><span>Hotmart</span></a>
+            </div>
           </article>
           <article class="plano plano-basico">
             <h3>Básico</h3>
@@ -221,10 +225,14 @@
               <li class="fora">Roteiros do Hot Beach e de Olímpia completa</li>
               <li class="fora">Os 4 bônus</li>
             </ul>
-            <a class="btn btn-contorno btn-largo" href="#planos" data-checkout="basico">Quero o Básico</a>
+            <p class="pagar-texto">Quero este plano — escolha onde pagar:</p>
+            <div class="pagar" role="group" aria-label="Pagar o plano Básico">
+              <a class="btn-plataforma kiwify" href="#planos" data-checkout="basico_kiwify" data-plataforma="kiwify"><span>Kiwify</span></a>
+              <a class="btn-plataforma hotmart" href="#planos" data-checkout="basico_hotmart" data-plataforma="hotmart"><span>Hotmart</span></a>
+            </div>
           </article>
         </div>
-        <p class="planos-nota">Compra processada pela Hotmart, com ambiente seguro.</p>
+        <p class="planos-nota">Compra processada pela Kiwify ou pela Hotmart, com ambiente seguro. Escolha a que preferir.</p>
       </div>
     </section>
 
@@ -235,7 +243,7 @@
           <div class="selo7" aria-hidden="true"><div><b>7</b><span>dias</span></div></div>
           <div>
             <h2>Garantia de 7 dias</h2>
-            <p>Se o material não for o que você esperava, peça o reembolso pela Hotmart em até 7 dias depois da compra. O pedido é feito direto na Hotmart, de forma simples.</p>
+            <p>Se o material não for o que você esperava, peça o reembolso em até 7 dias depois da compra. O pedido é feito direto na plataforma onde você comprou (Kiwify ou Hotmart), de forma simples.</p>
           </div>
         </div>
       </div>
@@ -249,7 +257,7 @@
         </div>
         <div class="faq">
           <details><summary>É oficial dos parques?</summary><div class="resp"><p>Não. É um material independente, sem vínculo com o Thermas dos Laranjais ou com o Hot Beach. Horários, preços e atrações podem mudar, então confira sempre os canais oficiais dos parques antes de ir.</p></div></details>
-          <details><summary>Como eu recebo?</summary><div class="resp"><p>Por e-mail, logo depois da compra, pela Hotmart. O acesso é imediato.</p></div></details>
+          <details><summary>Como eu recebo?</summary><div class="resp"><p>Por e-mail, logo depois da compra, pela plataforma onde você pagou: Kiwify ou Hotmart. O acesso é imediato.</p></div></details>
           <details><summary>Funciona no celular? Dá para imprimir?</summary><div class="resp"><p>Sim, as duas coisas. O PDF foi feito no formato de tela de celular e também pode ser impresso.</p></div></details>
           <details><summary>E se os parques mudarem?</summary><div class="resp"><p>No plano Completo, o bônus 4 entrega a atualização da temporada 2027 grátis, por e-mail.</p></div></details>
           <details><summary>Serve para criança pequena?</summary><div class="resp"><p>Sim. O roteiro 1 é para famílias com crianças até 6 anos no Thermas dos Laranjais, e o roteiro 6 é para crianças pequenas no Hot Beach.</p></div></details>
@@ -290,13 +298,20 @@
   <script src="../assets/site.js"></script>
   <script>
     /* ===== LINKS DE CHECKOUT — cole aqui os links de cada plano =====
-       Para usar Eduzz ou Kiwify depois, crie a chave (ex.: completo_eduzz)
-       e troque o data-checkout do botão para o mesmo nome. */
+       Chave = plano_plataforma, igual ao data-checkout do botão.
+       Para outra plataforma depois (ex.: Eduzz), crie completo_eduzz e um botão com o mesmo nome. */
     const CHECKOUT = {
-      completo: "https://pay.hotmart.com/I108538908N?checkoutMode=10",
-      basico:   "https://pay.hotmart.com/P108542903Y?checkoutMode=10"
-      // completo_eduzz: "",
-      // completo_kiwify: ""
+      completo_hotmart: "https://pay.hotmart.com/I108538908N?checkoutMode=10",
+      basico_hotmart:   "https://pay.hotmart.com/P108542903Y?checkoutMode=10",
+      completo_kiwify:  "https://pay.kiwify.com.br/ssrza12",
+      basico_kiwify:    "https://pay.kiwify.com.br/TCeye6z"
+    };
+
+    /* Logos das plataformas: se existir assets/logo-kiwify.svg (ou .png) e
+       assets/logo-hotmart.svg (ou .png), o botão mostra a imagem no lugar do nome. */
+    const LOGOS = {
+      kiwify:  { arquivos: ["../assets/logo-kiwify.svg", "../assets/logo-kiwify.png"],  alt: "Pagar pela Kiwify" },
+      hotmart: { arquivos: ["../assets/logo-hotmart.svg", "../assets/logo-hotmart.png"], alt: "Pagar pela Hotmart" }
     };
 
     (function () {
@@ -318,8 +333,27 @@
         if (pronto(url)) a.href = linkCom(url);
         a.addEventListener("click", function (ev) {
           if (!pronto(url)) { ev.preventDefault(); alert("Link de checkout ainda não configurado."); return; }
-          if (window.fbq) fbq("track", "InitiateCheckout", { content_name: "Roteiros Prontos Olimpia - " + a.dataset.checkout });
+          // ex.: "Roteiros Prontos Olimpia - completo - kiwify"
+          if (window.fbq) fbq("track", "InitiateCheckout", { content_name: "Roteiros Prontos Olimpia - " + a.dataset.checkout.replace("_", " - ") });
         });
+      });
+
+      // Troca o nome escrito pelo logo, se o arquivo existir em assets/
+      Object.keys(LOGOS).forEach(function (p) {
+        var cfg = LOGOS[p];
+        (function tenta(i) {
+          if (i >= cfg.arquivos.length) return;
+          var img = new Image();
+          img.onload = function () {
+            document.querySelectorAll('.btn-plataforma[data-plataforma="' + p + '"]').forEach(function (b) {
+              var el = document.createElement("img");
+              el.src = cfg.arquivos[i]; el.alt = cfg.alt;
+              b.textContent = ""; b.appendChild(el); b.classList.add("com-logo");
+            });
+          };
+          img.onerror = function () { tenta(i + 1); };
+          img.src = cfg.arquivos[i];
+        })(0);
       });
 
       // ViewContent quando a seção de planos aparece (uma vez)

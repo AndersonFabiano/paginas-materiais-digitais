@@ -117,6 +117,25 @@
 .plano .btn { margin-top: auto; }
 .plano-destaque { border-color: var(--coral-700); box-shadow: 0 24px 50px -24px rgba(217, 72, 63, .55); }
 .plano-destaque .etiqueta { position: absolute; top: -15px; left: 22px; background: var(--sol); color: var(--teal-dark); font-family: var(--fonte-titulo); font-weight: 800; padding: 4px 14px; border-radius: 999px; font-size: .95rem; }
+/* Escolha da plataforma de pagamento (Kiwify / Hotmart) — mesmo tamanho e destaque */
+.plano .pagar-texto { margin: auto 0 10px; font-size: .92rem; font-weight: 700; color: var(--teal-dark); }
+.pagar { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.btn-plataforma {
+  display: flex; align-items: center; justify-content: center;
+  min-height: 52px; padding: 10px 8px; border-radius: 14px;
+  font-family: var(--fonte-titulo); font-weight: 800; font-size: 1.15rem; line-height: 1;
+  color: #fff; text-decoration: none; border: 2px solid transparent;
+  transition: transform .15s ease, filter .15s ease;
+}
+.btn-plataforma:hover { transform: translateY(-1px); filter: brightness(.93); }
+/* tons escurecidos das cores das marcas para o texto branco ter contraste AA */
+.btn-plataforma.kiwify  { background: #0B7A45; }
+.btn-plataforma.hotmart { background: #C63C14; }
+/* quando houver logo oficial em assets/: fundo branco, borda na cor da plataforma */
+.btn-plataforma.com-logo { background: #fff; }
+.btn-plataforma.com-logo.kiwify  { border-color: #0B7A45; }
+.btn-plataforma.com-logo.hotmart { border-color: #C63C14; }
+.btn-plataforma img { max-height: 26px; max-width: 80%; width: auto; }
 .planos-nota { text-align: center; color: var(--texto-suave); font-size: .92rem; margin: 22px 0 0; }
 @media (min-width: 820px) {
   .planos { grid-template-columns: 1fr 1fr; max-width: 900px; margin: 0 auto; }
