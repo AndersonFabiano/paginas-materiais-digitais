@@ -18,14 +18,29 @@
   <link rel="stylesheet" href="assets/site.css">
   <style>
     .vitrine-hero { background: linear-gradient(180deg, var(--agua) 0%, #fff 100%); padding: 48px 0 32px; }
-    .vitrine-hero p { max-width: 560px; color: var(--texto-suave); font-size: 1.125rem; }
+    .vitrine-hero .container { display: grid; gap: 24px; align-items: end; }
+    .vitrine-hero p { max-width: 560px; color: var(--texto-suave); font-size: 1.125rem; margin: 0; }
     .vitrine-hero h1 { max-width: 640px; }
+    @media (min-width: 900px) { .vitrine-hero .container { grid-template-columns: 1fr auto; gap: 40px; } }
+
+    /* Filtro por categoria (no topo, à direita) */
+    .filtro { display: grid; gap: 6px; }
+    .filtro label { font-family: var(--fonte-titulo); font-weight: 700; font-size: .95rem; color: var(--teal-dark); }
+    .filtro .campo { display: flex; align-items: center; gap: 10px; background: #fff; border: 2px solid var(--borda); border-radius: 12px; padding: 0 12px; min-height: 48px; min-width: 240px; }
+    .filtro .campo:focus-within { border-color: var(--teal); }
+    .filtro .quadrado { flex: none; width: 16px; height: 16px; border-radius: 4px; background: var(--cat-cor, var(--teal-dark)); }
+    .filtro select { flex: 1; border: 0; background: transparent; font: inherit; font-weight: 700; color: var(--texto); min-height: 44px; cursor: pointer; }
+    .filtro select:focus { outline: none; }
+    .filtro .resultado { font-size: .85rem; color: var(--texto-suave); margin: 0; min-height: 1.2em; }
+
     .produtos { padding: 16px 0 72px; }
     .grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px; list-style: none; margin: 0; padding: 0; }
-    .card { background: #fff; border: 1px solid var(--borda); border-radius: var(--raio); overflow: hidden; box-shadow: var(--sombra); display: flex; flex-direction: column; }
+    .card { --cat-cor: var(--borda); background: #fff; border: 2px solid var(--cat-cor); border-radius: var(--raio); overflow: hidden; box-shadow: var(--sombra); display: flex; flex-direction: column; position: relative; }
+    .card[hidden] { display: none; }
     .card img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; background: var(--agua); }
+    /* Etiqueta da categoria: retângulo no canto superior esquerdo do texto do card, na cor da categoria */
+    .card .tag { align-self: flex-start; font-family: var(--fonte-titulo); font-size: .85rem; font-weight: 700; line-height: 1; color: var(--cat-texto, #fff); background: var(--cat-tag, var(--teal-dark)); padding: 7px 12px; border-radius: 6px; }
     .card .corpo { padding: 18px 20px 22px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
-    .card .tag { align-self: flex-start; font-size: .8rem; font-weight: 700; color: var(--teal-dark); background: var(--agua); padding: 3px 10px; border-radius: 999px; }
     .card h2 { font-size: 1.35rem; margin: 0; }
     .card p { margin: 0; color: var(--texto-suave); font-size: 1rem; }
     .card .btn { margin-top: auto; min-height: 48px; font-size: 1.05rem; }
@@ -44,24 +59,38 @@
   <main>
     <section class="vitrine-hero">
       <div class="container">
-        <h1>Materiais digitais práticos para o seu dia a dia</h1>
-        <p>Guias práticos em PDF, para abrir no celular ou imprimir. Escolha um material abaixo e veja tudo o que vem dentro.</p>
+        <div>
+          <h1>Materiais digitais práticos para o seu dia a dia</h1>
+          <p>Guias práticos em PDF, para abrir no celular ou imprimir. Escolha um material abaixo e veja tudo o que vem dentro.</p>
+        </div>
+        <div class="filtro">
+          <label for="categoria">Pesquisar por categoria</label>
+          <div class="campo">
+            <span class="quadrado" aria-hidden="true"></span>
+            <select id="categoria" aria-controls="lista-produtos">
+              <option value="">Todas as categorias</option>
+            </select>
+          </div>
+          <p class="resultado" id="resultado" aria-live="polite"></p>
+        </div>
       </div>
     </section>
 
     <section class="produtos" id="produtos" aria-label="Produtos">
       <div class="container">
-        <ul class="grade">
+        <ul class="grade" id="lista-produtos">
 
           <!-- =====================================================
                CARD DE PRODUTO — para adicionar um novo produto,
-               copie do <li> até o </li> e troque: imagem, tag,
-               título, frase e o link (pasta-do-produto/index.html).
+               copie do <li> até o </li> e troque: data-categoria,
+               imagem, título, frase e o link (pasta-do-produto/index.html).
+               data-categoria = uma das chaves de CATEGORIAS no fim da página
+               (viagem, saude...). A etiqueta, as cores e o filtro saem sozinhos.
                ===================================================== -->
-          <li class="card">
+          <li class="card" data-categoria="viagem">
             <img src="olimpia/img/card.jpg" alt="Capa do material Roteiros Prontos Olímpia" width="600" height="600" loading="lazy">
             <div class="corpo">
-              <span class="tag">Viagem</span>
+              <span class="tag"></span>
               <h2>Roteiros Prontos Olímpia</h2>
               <p>10 roteiros por perfil de família para curtir o Thermas dos Laranjais e o Hot Beach com menos fila e mais organização.</p>
               <a class="btn btn-secundario" href="olimpia/index.html">Ver material</a>
@@ -85,5 +114,56 @@
   </footer>
 
   <script src="assets/site.js"></script>
+  <script>
+    /* ===== CATEGORIAS DA VITRINE — cada categoria tem a sua cor =====
+       cor   = contorno do card e quadradinho do filtro
+       tag   = fundo da etiqueta no card
+       texto = cor da letra da etiqueta (branca em cor escura, escura em cor clara)
+       Só aparecem no filtro as categorias que já têm algum card. */
+    const CATEGORIAS = {
+      viagem: { nome: "Viagem", cor: "#0E9AA7", tag: "#0A7F8A", texto: "#ffffff" },  // azul-piscina
+      saude:  { nome: "Saúde",  cor: "#F7A35C", tag: "#F7A35C", texto: "#4A2300" }   // laranja claro
+      // próxima: { nome: "...", cor: "#1FB58F", tag: "#1FB58F", texto: "#06372A" }  // verde-piscina
+    };
+
+    (function () {
+      var cards = [].slice.call(document.querySelectorAll(".card[data-categoria]"));
+      var select = document.getElementById("categoria");
+      var quadrado = document.querySelector(".filtro .quadrado");
+      var resultado = document.getElementById("resultado");
+      var usadas = {};
+
+      // Etiqueta e cores de cada card
+      cards.forEach(function (c) {
+        var cat = CATEGORIAS[c.dataset.categoria];
+        if (!cat) return;
+        usadas[c.dataset.categoria] = (usadas[c.dataset.categoria] || 0) + 1;
+        c.style.setProperty("--cat-cor", cat.cor);
+        c.style.setProperty("--cat-tag", cat.tag);
+        c.style.setProperty("--cat-texto", cat.texto);
+        c.querySelector(".tag").textContent = cat.nome;
+      });
+
+      // Opções do filtro: só categorias com material, na ordem de CATEGORIAS
+      Object.keys(CATEGORIAS).forEach(function (k) {
+        if (!usadas[k]) return;
+        var o = document.createElement("option");
+        o.value = k; o.textContent = CATEGORIAS[k].nome;
+        select.appendChild(o);
+      });
+
+      function filtra() {
+        var k = select.value, n = 0;
+        cards.forEach(function (c) {
+          var mostra = !k || c.dataset.categoria === k;
+          c.hidden = !mostra; if (mostra) n++;
+        });
+        quadrado.style.background = k ? CATEGORIAS[k].cor : "";
+        resultado.textContent = n + (n === 1 ? " material" : " materiais") + (k ? " em " + CATEGORIAS[k].nome : "");
+      }
+      select.addEventListener("change", filtra);
+      filtra();
+    })();
+  </script>
 </body>
 </html>
